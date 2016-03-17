@@ -1,0 +1,19 @@
+{
+  "name": "Taxi",
+  "version": "0.0.0",
+  "description": "Taxi Booking, App Server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Salem MOSBAHI",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "~4.13.4",
+    "body-parser": "~1.15.0",
+    "csprng": "~0.1.1",
+    "crypto-js": "~3.1.6",
+    "mongoose": "~4.4.7",
+    "socket.io": "~1.3.5"
+  }
+}
