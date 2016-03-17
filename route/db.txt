@@ -1,0 +1,6 @@
+use taxi
+db.countrys.insert({name:'Tunisia',city:[{name:'Sousse'},{name:'Mahdia'}]})
+db.countrys.insert({name:'United Kingdom',city:[{name:'London'},{name:'Southampton'}]})
+db.clients.update({fname:'Salem'},{$set:{connected:false}})
+db.reclamations.insert({token:'56c2fac26906f8ea1f49b4af',username:'Faten Belhadj',subject:'Bla bla',date:'17-02-2016',status:true})
+db.reclamations.update({_id:'56cdb378d2fc840f0e2d9715'},{$push:{messages:{sender:true,message:'xxx',date:'xxx'}}},{upsert:true})
