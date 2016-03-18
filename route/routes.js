@@ -1,6 +1,7 @@
 var method	= require('./methods');
 var country = require('controllers/country');
 var client	= require('controllers/client');
+var driver	= require('controllers/driver');
 var reclamation	= require('controllers/reclamation');
 var book	= require('controllers/book');
 
@@ -26,6 +27,7 @@ module.exports = function(app){
 
 	app.post('/signup',function(req,res){
 		var key = method.key(req.body.key);
+		var app = method.decode(req.body.app,key);
 		var fname = method.decode(req.body.fname,key);
 		var lname = method.decode(req.body.lname,key);
 		var gender = method.decode(req.body.gender,key);
@@ -36,32 +38,61 @@ module.exports = function(app){
 		var password = method.decode(req.body.password,key);
 		var phone = method.decode(req.body.phone,key);
 		var picture = req.body.picture;
-		client.signup(fname,lname,gender,dateN,country,city,email,password,phone,picture,function(found){
-			res.json(found);
-		});
+		if (app == "AppTaxi") {
+			client.signup(fname,lname,gender,dateN,country,city,email,password,phone,picture,function(found){
+				res.json(found);
+			});
+		} else if (app == "AppTaxiDriver") {
+			driver.signup(fname,lname,gender,dateN,country,city,email,password,phone,picture,function(found){
+				res.json(found);
+			});
+		}
 	});
 
 	app.post('/login',function(req,res){
 		var key = method.key(req.body.key);
+		var app = method.decode(req.body.app,key);
 		var email = method.decode(req.body.email,key);
 		var password = method.decode(req.body.password,key);
-		client.login(email,password,function(found){
-			res.json(found);
-		});
+		if (app == "AppTaxi") {
+			client.login(email,password,function(found){
+				res.json(found);
+			});
+		} else if (app == "AppTaxiDriver") {
+			driver.login(email,password,function(found){
+				res.json(found);
+			});
+		}
 	});
 
 	app.post('/profile',function(req,res){
+		var key = method.key(req.body.key);
+		var app = method.decode(req.body.app,key);
 		var token = req.body.token;
-		client.profile(token,function(found){
-			res.json(found);
-		});
+		if (app == "AppTaxi") {
+			client.profile(token,function(found){
+				res.json(found);
+			});
+		} else if (app == "AppTaxiDriver") {
+			driver.profile(token,function(found){
+				res.json(found);
+			});
+		}
 	});
 
   app.post('/logout',function(req,res){
+		var key = method.key(req.body.key);
+		var app = method.decode(req.body.app,key);
 		var token = req.body.token;
-		client.logout(token,function(found){
-			res.json(found);
-		});
+		if (app == "AppTaxi") {
+			client.logout(token,function(found){
+				res.json(found);
+			});
+		} else if (app == "AppTaxiDriver") {
+			driver.logout(token,function(found){
+				res.json(found);
+			});
+		}
 	});
 
 	app.post('/getAllReclamation',function(req,res){
