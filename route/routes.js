@@ -7,10 +7,7 @@ var book	= require('controllers/book');
 
 module.exports = function(app){
 
-	app.get('/',function(req,res){
-		//res.end("Taxi Booking Project");
-		res.sendFile(__dirname+'/index.html');
-	});
+	
 
 	app.post('/getAllCountry',function(req,res){
 		country.getAllCountry(function(found){
