@@ -7,8 +7,6 @@ var book	= require('controllers/book');
 
 module.exports = function(app){
 
-	
-
 	app.post('/getAllCountry',function(req,res){
 		country.getAllCountry(function(found){
 			res.json(found);
