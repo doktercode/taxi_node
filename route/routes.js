@@ -90,6 +90,13 @@ module.exports = function(app){
 		}
 	});
 
+	app.post('/getDriver',function(req,res){
+		var token = req.body.token;
+		driver.getDriver(token,function(found){
+			res.json(found);
+		});
+	});
+
 	app.post('/getAllReclamation',function(req,res){
 		var token = req.body.token;
 		reclamation.getAllReclamation(token,function(found){

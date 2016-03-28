@@ -1,3 +1,5 @@
+var country = require('controllers/country');
+
 module.exports = function(app){
 
   app.get('/',function(req,res){
