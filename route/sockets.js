@@ -1,16 +1,83 @@
 module.exports = function(io){
-  var gpsData = {};
+  //var gpsData = {};
   io.on('connection',function(socket){
     console.log('one user connected ' + socket.id);
-    gpsData[socket.id] = {socket: socket};
+    //gpsData[socket.id] = {socket: socket};
 
     socket.on('gps',function(data){
-      gpsData[socket.id].data = data;
+      //gpsData[socket.id].data = data;
       var sockets = io.sockets.sockets;
       var paquet = { 'token':data.token, 'socket':socket.id, 'latitude':data.latitude, 'longitude':data.longitude, 'working':data.working };
       sockets.forEach(function(sock){
         if(sock.id != socket.id){
           sock.emit('gps',paquet);
+        }
+      });
+    });
+
+    socket.on('preBook',function(data){
+      //gpsData[socket.id].data = data;
+      var sockets = io.sockets.sockets;
+      var paquet = { 'token':data.token, 'fname':data.fname, 'latitude':data.latitude, 'longitude':data.longitude };
+      sockets.forEach(function(sock){
+        if(sock.id != socket.id){
+          sock.emit('preBook',paquet);
+        }
+      });
+    });
+
+    socket.on('validBook',function(data){
+      //gpsData[socket.id].data = data;
+      var sockets = io.sockets.sockets;
+      var paquet = { 'token':data.token, 'latitude':data.latitude, 'longitude':data.longitude };
+      sockets.forEach(function(sock){
+        if(sock.id != socket.id){
+          sock.emit('validBook',paquet);
+        }
+      });
+    });
+
+    socket.on('postBook',function(data){
+      //gpsData[socket.id].data = data;
+      var sockets = io.sockets.sockets;
+      var paquet = { 'token':data.token, 'latitude':data.latitude, 'longitude':data.longitude };
+      sockets.forEach(function(sock){
+        if(sock.id != socket.id){
+          sock.emit('postBook',paquet);
+        }
+      });
+    });
+
+    socket.on('drawRoute',function(data){
+      //gpsData[socket.id].data = data;
+      var sockets = io.sockets.sockets;
+      var paquet = { 'token':data.token, 'originLatitude':data.originLatitude, 'originLongitude':data.originLongitude,
+        'desLatitude':data.desLatitude, 'desLongitude':data.desLongitude };
+      sockets.forEach(function(sock){
+        if(sock.id != socket.id){
+          sock.emit('drawRoute',paquet);
+        }
+      });
+    });
+
+    socket.on('validRoute',function(data){
+      //gpsData[socket.id].data = data;
+      var sockets = io.sockets.sockets;
+      var paquet = { 'validRoute':data.validRoute, 'tokenClient':data.tokenClient };
+      sockets.forEach(function(sock){
+        if(sock.id != socket.id){
+          sock.emit('validRoute',paquet);
+        }
+      });
+    });
+
+    socket.on('endCourse',function(data){
+      //gpsData[socket.id].data = data;
+      var sockets = io.sockets.sockets;
+      var paquet = { 'pcourse':data.pcourse, 'ptake':data.ptake, 'preturn':data.preturn, 'token':data.token };
+      sockets.forEach(function(sock){
+        if(sock.id != socket.id){
+          sock.emit('endCourse',paquet);
         }
       });
     });
@@ -35,7 +102,7 @@ module.exports = function(io){
           sock.emit('gps',paquet);
         }
       });
-      delete gpsData[socket.id];
+      //delete gpsData[socket.id];
     })
   });
 }
