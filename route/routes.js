@@ -3,6 +3,7 @@ var country = require('controllers/country');
 var client	= require('controllers/client');
 var driver	= require('controllers/driver');
 var reclamation	= require('controllers/reclamation');
+var service	= require('controllers/service');
 var book	= require('controllers/book');
 
 module.exports = function(app){
@@ -127,6 +128,37 @@ module.exports = function(app){
 		var idRec = req.body._id;
 		var message = method.decode(req.body.message,key);
 		reclamation.addMessage(idRec,message,function(found){
+			res.json(found);
+		});
+	});
+
+	app.post('/getAllService',function(req,res){
+		service.getAllService(function(found){
+			res.json(found);
+		});
+	});
+
+	app.post('/addBook',function(req,res){
+		var tokenDriver = req.body.tokenDriver;
+		var nameDriver = req.body.username;
+		var tokenClient = req.body.tokenClient;
+		var nameClient = req.body.fname;
+		var originLatitude = parseFloat(req.body.originLatitude);
+		var originLongitude = parseFloat(req.body.originLongitude);
+		var desLatitude = parseFloat(req.body.desLatitude);
+		var desLongitude = parseFloat(req.body.desLongitude);
+		var pcourse = parseFloat(req.body.pcourse);
+		var ptake = parseFloat(req.body.ptake);
+		var preturn = parseFloat(req.body.preturn);
+		book.addBook(tokenDriver,nameDriver,tokenClient,nameClient,originLatitude,originLongitude,desLatitude,desLongitude,pcourse,ptake,preturn,function(found){
+			res.json(found);
+		});
+	});
+
+	app.post('/addNote',function(req,res){
+		var idBook = req.body._id;
+		var value = req.body.value;
+		book.addNote(idBook,value,function(found){
 			res.json(found);
 		});
 	});

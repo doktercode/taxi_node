@@ -6,3 +6,6 @@ db.drivers.update({fname:'Med'},{$push:{taxis:{working:true,model:'Golf 5',seria
 db.reclamations.update({subject:'ssss'},{$set:{status:true}})
 db.reclamations.insert({token:'56c2fac26906f8ea1f49b4af',username:'Faten Belhadj',subject:'Bla bla',date:'17-02-2016',status:true})
 db.reclamations.update({_id:'56cdb378d2fc840f0e2d9715'},{$push:{messages:{sender:true,message:'xxx',date:'xxx'}}},{upsert:true})
+db.services.insert({name:'g1',value:1})
+db.services.insert({name:'g2',value:2})
+db.services.insert({name:'g3',value:3})

@@ -74,7 +74,7 @@ module.exports = function(io){
     socket.on('endCourse',function(data){
       //gpsData[socket.id].data = data;
       var sockets = io.sockets.sockets;
-      var paquet = { 'pcourse':data.pcourse, 'ptake':data.ptake, 'preturn':data.preturn, 'token':data.token };
+      var paquet = { '_id':data._id, 'pcourse':data.pcourse, 'ptake':data.ptake, 'preturn':data.preturn, 'token':data.token };
       sockets.forEach(function(sock){
         if(sock.id != socket.id){
           sock.emit('endCourse',paquet);
