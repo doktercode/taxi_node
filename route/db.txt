@@ -9,3 +9,4 @@ db.reclamations.update({_id:'56cdb378d2fc840f0e2d9715'},{$push:{messages:{sender
 db.services.insert({name:'g1',value:1})
 db.services.insert({name:'g2',value:2})
 db.services.insert({name:'g3',value:3})
+db.drivers.update({fname:'Med'},{$set:{pt:7}})

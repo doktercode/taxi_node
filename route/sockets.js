@@ -18,7 +18,7 @@ module.exports = function(io){
     socket.on('preBook',function(data){
       //gpsData[socket.id].data = data;
       var sockets = io.sockets.sockets;
-      var paquet = { 'token':data.token, 'fname':data.fname, 'latitude':data.latitude, 'longitude':data.longitude };
+      var paquet = { 'tokenDriver':data.tokenDriver, 'tokenClient':data.tokenClient, 'fname':data.fname, 'latitude':data.latitude, 'longitude':data.longitude };
       sockets.forEach(function(sock){
         if(sock.id != socket.id){
           sock.emit('preBook',paquet);

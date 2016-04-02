@@ -157,8 +157,9 @@ module.exports = function(app){
 
 	app.post('/addNote',function(req,res){
 		var idBook = req.body._id;
+		var tokenDriver = req.body.tokenDriver;
 		var value = req.body.value;
-		book.addNote(idBook,value,function(found){
+		book.addNote(idBook,tokenDriver,value,function(found){
 			res.json(found);
 		});
 	});
