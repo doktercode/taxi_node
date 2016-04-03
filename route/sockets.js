@@ -4,13 +4,13 @@ module.exports = function(io){
     console.log('one user connected ' + socket.id);
     //gpsData[socket.id] = {socket: socket};
 
-    socket.on('gps',function(data){
+    socket.on('searchTaxi',function(data){
       //gpsData[socket.id].data = data;
       var sockets = io.sockets.sockets;
       var paquet = { 'token':data.token, 'socket':socket.id, 'latitude':data.latitude, 'longitude':data.longitude, 'working':data.working };
       sockets.forEach(function(sock){
         if(sock.id != socket.id){
-          sock.emit('gps',paquet);
+          sock.emit('searchTaxi',paquet);
         }
       });
     });
