@@ -1,6 +1,13 @@
 use taxi
-db.countrys.insert({name:'Tunisia',city:[{name:'Sousse'},{name:'Mahdia'}]})
+
+db.countrys.insert({name:'Tunisia',city:[{name:'Sousse'},{name:'Tunis'},{name:'Ariana'},{name:'Monastir'},
+{name:'Mahdia'},{name:'Beja'},{name:'Ben Arous'},{name:'Bizerte'},{name:'Gabes'},{name:'Gafsa'},{name:'Jendouba'},
+{name:'Kairouan'},{name:'Kasserine'},{name:'Kebili'},{name:'Kef'},{name:'Manouba'},{name:'Medenine'},{name:'Nabeul'},
+{name:'Sfax'},{name:'Sidi Bouzid'},{name:'Siliana'},{name:'Tataouine'},{name:'Tozeur'},{name:'Zaghouan'}]})
+
 db.countrys.insert({name:'United Kingdom',city:[{name:'London'},{name:'Southampton'}]})
+db.countrys.insert({name:'France',city:[{name:'Paris'},{name:'Lille'}]})
+
 db.clients.update({fname:'Salem'},{$set:{connected:false}})
 db.drivers.update({fname:'Med'},{$push:{taxis:{working:true,model:'Golf 5',serial:'102tn2036',places:'4',luggages:'30',color:'#552025',date:'23/04/2016'}}})
 db.reclamations.update({subject:'ssss'},{$set:{status:true}})
@@ -10,3 +17,8 @@ db.services.insert({name:'g1',value:1})
 db.services.insert({name:'g2',value:2})
 db.services.insert({name:'g3',value:3})
 db.drivers.update({fname:'Med'},{$set:{pt:7}})
+db.drivers.update({fname:'Mahdi'},{$push:{taxis:{working:true,model:'Clio',serial:'98tn2036',places:'4',luggages:'15',color:'#ff5486',date:'23/04/2016'}}})
+
+db.cartaxis.save({mark:'Volkswagen',model:'Golf 5',serial:'123/4000',places:5,luggages:35,color:'#449658',date:'20/4/2013'})
+db.cartaxis.save({mark:'Renault',model:'Clio 4',serial:'170/4444',places:5,luggages:35,color:'#112525',date:'20/7/2015'})
+db.cartaxis.save({mark:'Renault',model:'Clio 3',serial:'170',places:5,luggages:35,color:'#112525',date:'20/7/2015'})

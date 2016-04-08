@@ -5,6 +5,7 @@ var driver	= require('controllers/driver');
 var reclamation	= require('controllers/reclamation');
 var service	= require('controllers/service');
 var book	= require('controllers/book');
+var taxe	= require('controllers/taxe');
 
 module.exports = function(app){
 
@@ -187,5 +188,27 @@ module.exports = function(app){
 				res.json(found);
 			});
 		}
+	});
+
+	app.post('/getTaxiDriving',function(req,res){
+		var token = req.body.token;
+		driver.getTaxi(token,function(found){
+			res.json(found);
+		});
+	});
+
+	app.post('/searchTaxi',function(req,res){
+		var serial = req.body.serial;
+		taxe.getTaxi(serial,function(found){
+			res.json(found);
+		});
+	});
+
+	app.post('/addTaxiToDriver',function(req,res){
+		var token = req.body.token;
+		var idTaxi = req.body._id;
+		taxe.addTaxiToDriver(token,idTaxi,function(found){
+			res.json(found);
+		});
 	});
 }
