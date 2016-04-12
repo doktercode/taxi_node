@@ -5,7 +5,7 @@ var driver	= require('controllers/driver');
 var reclamation	= require('controllers/reclamation');
 var service	= require('controllers/service');
 var book	= require('controllers/book');
-var taxe	= require('controllers/taxe');
+var taxi	= require('controllers/taxi');
 
 module.exports = function(app){
 
@@ -199,7 +199,7 @@ module.exports = function(app){
 
 	app.post('/searchTaxi',function(req,res){
 		var serial = req.body.serial;
-		taxe.getTaxi(serial,function(found){
+		taxi.getTaxi(serial,function(found){
 			res.json(found);
 		});
 	});
@@ -207,7 +207,16 @@ module.exports = function(app){
 	app.post('/addTaxiToDriver',function(req,res){
 		var token = req.body.token;
 		var idTaxi = req.body._id;
-		taxe.addTaxiToDriver(token,idTaxi,function(found){
+		taxi.addTaxiToDriver(token,idTaxi,function(found){
+			res.json(found);
+		});
+	});
+
+	app.post('/editTaxiFromDriver',function(req,res){
+		var token = req.body.token;
+		var idTaxi = req.body._id;
+		var working = (req.body.working == "true") ? true : false;
+		driver.editTaxiFromDriver(token,idTaxi,working,function(found){
 			res.json(found);
 		});
 	});
