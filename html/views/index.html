@@ -95,18 +95,16 @@
 		</div><!--.page-header-->
 
 		<div class="display-animation">
-			<div class="full-content margin-top-40 margin-bottom-40 bg-white">
+			<div class="page full-content margin-top-40 margin-bottom-40 bg-white">
 				<div class="row">
 
-					<div class="col-md-4 material-animate padding-right-40">
-						<h4>Sales in 2014</h4>
-						<p class="text-grey">Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.</p>
+					<div class="col-md-12 material-animate padding-right-40">
+						<form id="login" style="display:none;">
+							<input name="username">
+							<input name="password">
+							<button type="submit">se connecter</button>
+						</form>
 					</div><!--.col-->
-
-					<div class="col-md-8 material-animate">
-						<div class="chart chart-sales-by-year without-time"></div>
-					</div><!--.col-->
-
 
 				</div><!--.row-->
 			</div><!--.full-content-->
@@ -134,8 +132,8 @@
 	      <li>
 	        <a>Taxis</a>
 	        <ul class="child-menu">
-						<li><a href="/taxiAdd">Add Taxi</a></li>
-	          <li><a href="/taxiConsult">Consult Taxis</a></li>
+						<li><a class="ajaxify" href="/taxiAdd">Add Taxi</a></li>
+	          <li><a class="ajaxify" href="/taxiConsult">Consult Taxis</a></li>
 	        </ul>
 	      </li>
 	      <li>
@@ -756,7 +754,7 @@
 	<!-- END GLOBAL AND THEME VENDORS -->
 
 	<!-- BEGIN PLUGINS AREA -->
-	
+
 	<script src="globals/plugins/bxslider/jquery.bxslider.min.js"></script>
 	<script src="globals/plugins/audiojs/audiojs/audio.min.js"></script>
 	<script src="globals/plugins/d3/d3.min.js"></script>
@@ -786,6 +784,41 @@
 		ChartsKnob.init();
 
 	});
+	</script>
+	<script>
+	function ajaxify(url) {
+		$.get(url, function (html) {
+			$(".content").html(html);
+		});
+	}
+		$(document).on("click", ".ajaxify", function (event) {
+			event.preventDefault();
+			var href = $(this).attr("href");
+			ajaxify(href);
+		});
+	</script>
+
+	<script>
+		$("#login").submit(function (e) {
+			e.preventDefault();
+			$.post(
+				"/loginAdmin",
+				{
+					username: $("#login [name=username]").val(),
+					password: $("#login [name=password]").val()
+				},
+				function (res) {
+					if(res=="success")
+						ajaxify("/home");
+					else
+						alert("Invalid login !");
+				}
+			);
+		});
+		$.get("/isloggedin", function (res) {
+			if(res=="true") ajaxify("/home");
+			else $('#login').show();
+		});
 	</script>
 	<!-- END INITIALIZATION-->
 

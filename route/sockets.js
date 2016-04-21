@@ -60,13 +60,13 @@ module.exports = function(io){
       });
     });
 
-    socket.on('validRoute',function(data){
+    socket.on('stopBook',function(data){
       //gpsData[socket.id].data = data;
       var sockets = io.sockets.sockets;
-      var paquet = { 'validRoute':data.validRoute, 'tokenClient':data.tokenClient };
+      var paquet = { 'stopBook':data.stopBook, 'tokenClient':data.tokenClient };
       sockets.forEach(function(sock){
         if(sock.id != socket.id){
-          sock.emit('validRoute',paquet);
+          sock.emit('stopBook',paquet);
         }
       });
     });
@@ -78,6 +78,15 @@ module.exports = function(io){
       sockets.forEach(function(sock){
         if(sock.id != socket.id){
           sock.emit('endCourse',paquet);
+        }
+      });
+    });
+
+    socket.on('notify',function(data){
+      var sockets = io.sockets.sockets;
+      sockets.forEach(function(sock){
+        if(sock.id != socket.id){
+          sock.emit('notify',data);
         }
       });
     });

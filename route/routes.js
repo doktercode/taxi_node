@@ -220,4 +220,18 @@ module.exports = function(app){
 			res.json(found);
 		});
 	});
+
+	app.post('/haveTaxi',function(req,res){
+		var token = req.body.token;
+		driver.haveTaxi(token,function(found){
+			res.json(found);
+		});
+	});
+
+	app.post('/disableAccountBook',function(req,res){
+		var token = req.body.token;
+		driver.disableAccountBook(token,function(found){
+			res.json(found);
+		});
+	});
 }
